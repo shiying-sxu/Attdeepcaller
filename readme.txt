@@ -42,3 +42,17 @@ The output union.vcf.gz is placed in the specified folder: OUTPUT_DIR
 conda activate attdeepcaller
 
 ③python GetOverallMetrics.py --happy_vcf_fn=/work/Clair3-main-sy/clair3_ont_quickDemo/output/happy.vcf.gz --output_fn=/work/Clair3-main-sy/clair3_ont_quickDemo/output/metrics ##Statistical result
+
+5.Model available
+The trained model is available at the following link:
+Link: https://pan.baidu.com/s/1fO5mlrko5KhdH4lwXVr_Bw
+Extraction code: glcv
+
+6. Data available
+
+Reference genomes
+GRCh38_no_alt
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
+
+View in Supplementary Materials.
+
