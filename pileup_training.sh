@@ -21,13 +21,13 @@ PYTHON3="/home/user/anaconda3/envs/attdeepcaller/bin/python3"                   
 # Input parameters
 PLATFORM="ont"                         # e.g. {ont, hifi, ilmn}
 
-#OUTPUT_DIR="/work/Clair3-main-sy/data/HG001-600-1000-trainoutput/pileup/modeltest"                   # e.g. output_folder
-OUTPUT_DIR="/work/Clair3-main-sy/data/HG001-600-1000-trainoutput/pileup/modeltest"
+#OUTPUT_DIR="/work/attdeepcaller/data/HG001-600-1000-trainoutput/pileup/modeltest"                   # e.g. output_folder
+OUTPUT_DIR="/work/attdeepcaller/data/HG001-600-1000-trainoutput/pileup/modeltest"
 DATASET_FOLDER_PATH="${OUTPUT_DIR}/build"
 BINS_FOLDER_PATH="${DATASET_FOLDER_PATH}/bins"
 
 #
-MODEL_FOLDER_PATH="${OUTPUT_DIR}/NEWATT"
+MODEL_FOLDER_PATH="${OUTPUT_DIR}/ATT"
 mkdir -p ${MODEL_FOLDER_PATH}
 
 cd ${MODEL_FOLDER_PATH}

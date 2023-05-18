@@ -12,8 +12,8 @@
 
 # Benchmark using hap.py
 PLATFORM='ont'
-INPUT_DIR="/work/Clair3-main-sy/clair3_ont_quickDemo"
-OUTPUT_DIR="${INPUT_DIR}/output/NEWATT"
+INPUT_DIR="/work/attdeepcaller/clair3_ont_quickDemo"
+OUTPUT_DIR="${INPUT_DIR}/output/ATT"
 
 
 REF="GRCh38_no_alt_chr20.fa"

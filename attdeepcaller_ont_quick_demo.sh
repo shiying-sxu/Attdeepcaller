@@ -1,8 +1,8 @@
 PLATFORM='ont'
 
 ## HG003
-INPUT_DIR="/work/Clair3-main/data/datatest/HG003/GRCh38/"
-OUTPUT_DIR="/work/Clair3-main-sy/data/mytrainmodel/test/hg003-0305"
+INPUT_DIR="/work/attdeepcaller/data/datatest/HG003/GRCh38/"
+OUTPUT_DIR="/work/attdeepcaller/data/mytrainmodel/test/hg003-0305"
 ##mkdir -p ${INPUT_DIR}
 mkdir -p ${OUTPUT_DIR}
 THREADS=200
@@ -17,5 +17,5 @@ OUTPUT_VCF_FILE_PATH="merge_output.vcf.gz"
   --ref_fn=${INPUT_DIR}/${REF} \
   --threads=${THREADS} \
   --platform=${PLATFORM} \
-  --model_path=/work/Clair3-main-sy/data/mytrainmodel/ont/ \
+  --model_path=/work/attdeepcaller/data/mytrainmodel/ont/ \
   --output=${OUTPUT_DIR}

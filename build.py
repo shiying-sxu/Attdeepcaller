@@ -4,7 +4,7 @@ import platform
 from subprocess import run
 from cffi import FFI
 
-samver = "1.10"
+samver = "1.15.1"
 file_directory = os.path.dirname(os.path.realpath(__file__))
 htslib_dir = os.path.join(file_directory, 'samtools-{}'.format(samver), 'htslib-{}'.format(samver))
 
@@ -26,7 +26,7 @@ else:
         conda_path = os.environ['CONDA_PREFIX']
         extra_link_args = ['-Wl,-rpath={}/lib'.format(conda_path)]
     except:
-        print("[WARNING] Conda prefix not found, please activate attdeepcaller conda environment first!")
+        print("[WARNING] Conda prefix not found, please activate clair3 conda environment first!")
 
 ffibuilder = FFI()
 ffibuilder.set_source("libclair3",
@@ -37,8 +37,8 @@ ffibuilder.set_source("libclair3",
     #include "medaka_bamiter.h"
     #include "medaka_common.h"
     #include "medaka_khcounter.h"
-    #include "attdeepcaller_pileup.h"
-    #include "attdeepcaller_full_alignment.h"
+    #include "clair3_pileup.h"
+    #include "clair3_full_alignment.h"
     """,
     libraries=libraries,
     library_dirs=library_dirs,
@@ -49,11 +49,11 @@ ffibuilder.set_source("libclair3",
             'medaka_bamiter.c',
             'medaka_common.c',
             'medaka_khcounter.c',
-            'attdeepcaller_pileup.c',
-            'attdeepcaller_full_alignment.c')],
+            'clair3_pileup.c',
+            'clair3_full_alignment.c')],
     extra_compile_args=extra_compile_args,
     extra_link_args=extra_link_args,
-    extra_objects=['libhts.a']
+    extra_objects=[os.path.join(htslib_dir, 'libhts.a')]
 )
 
 cdef = [
@@ -61,7 +61,7 @@ cdef = [
     "bam_fset* create_bam_fset(char* fname);"
     "void destroy_bam_fset(bam_fset* fset);"
 ]
-for header in ('attdeepcaller_pileup.h', 'attdeepcaller_full_alignment.h'):
+for header in ('clair3_pileup.h', 'clair3_full_alignment.h'):
     with open(os.path.join(src_dir, header), 'r') as fh:
         # remove directives
         lines = ''.join(x for x in fh.readlines() if not x.startswith('#'))

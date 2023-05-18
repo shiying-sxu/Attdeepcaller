@@ -1,11 +1,6 @@
 #### 1. Setup variables
 #```bash
 # Setup executable variables
-#CLAIR3="/work/Clair3-main-sy/clair3.py"                                   # clair3.py
-#PYPY="/home/user/anaconda3/envs/syclair/bin/pypy3.6"                                 # e.g. pypy3
-#PARALLEL="/home/user/anaconda3/envs/syclair/bin/parallel"                         # e.g. parallel
-#SAMTOOLS="/home/user/anaconda3/envs/syclair/bin/samtools"                         # e.g. samtools
-#PYTHON3="python3"                             # e.g. python3
 ATTDEEPCALLER="/work/Attdeepcaller/attdeepcaller.py"
 PYPY="/home/user/anaconda3/envs/attdeepcaller/bin/pypy3.6"                                 # e.g. pypy3
 PARALLEL="/home/user/anaconda3/envs/attdeepcaller/bin/parallel"                         # e.g. parallel
@@ -14,19 +9,19 @@ PYTHON3="/home/user/anaconda3/envs/attdeepcaller/bin/python3"                   
 
 # Input parameters
 PLATFORM="ont"                         # e.g. {ont, hifi, ilmn}
-UNIFIED_VCF_FILE_PATH="/work/Clair3-main-sy/data/outputref-HG001-GRCh38/unified.vcf.gz"       # e.g. hg002.unified.vcf.gz
-ALL_BAM_FILE_PATH="/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.bam"           # e.g. hg002.bam
+UNIFIED_VCF_FILE_PATH="/work/attdeepcaller/data/outputref-HG001-GRCh38/unified.vcf.gz"       # e.g. hg002.unified.vcf.gz
+ALL_BAM_FILE_PATH="/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.bam"           # e.g. hg002.bam
 DEPTHS="1000"                  # e.g. 1000 (means no subsample)
-ALL_REFERENCE_FILE_PATH="/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.fa"   # e.g. hg002.fasta
-ALL_BED_FILE_PATH="/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.bed"           # e.g. hg002.bed
+ALL_REFERENCE_FILE_PATH="/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.fa"   # e.g. hg002.fasta
+ALL_BED_FILE_PATH="/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.bed"           # e.g. hg002.bed
 ALL_SAMPLE="GRCh38"                    # e.g. hg002
-OUTPUT_DIR="/work/Clair3-main-sy/data/HG001-600-1000-trainoutput/pileup/modeltest"                   # e.g. output_folder
+OUTPUT_DIR="/work/attdeepcaller/data/HG001-600-1000-trainoutput/pileup/modeltest"                   # e.g. output_folder
 # Each line represent one input BAM with a matched coverage in the "DEPTH" array
 ## check the "Training data subsamping" section on how to apply BAM subsampling
 ALL_BAM_FILE_PATH=(
-'/work/Clair3-main/data/datatest/subsample-HG001/GRCh38_1000.bam'
-'/work/Clair3-main/data/datatest/subsample-HG001/600_GRCh38.bam'
-'/work/Clair3-main/data/datatest/subsample-HG002/GRCh38_1000.bam'
+'/work/attdeepcaller/data/datatest/subsample-HG001/GRCh38_1000.bam'
+'/work/attdeepcaller/data/datatest/subsample-HG001/600_GRCh38.bam'
+'/work/attdeepcaller/data/datatest/subsample-HG002/GRCh38_1000.bam'
 )
 
 # Each line represents subsample ration to each sample, 1000 if no subsampling applies
@@ -45,23 +40,23 @@ ALL_SAMPLE=(
 
 # Each line represents the reference file of each sample
 ALL_REFERENCE_FILE_PATH=(
-'/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.fa'
-'/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.fa'
-'/work/Clair3-main/data/datatest/HG002/GRCh38/GRCh38.fa'
+'/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.fa'
+'/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.fa'
+'/work/attdeepcaller/data/datatest/HG002/GRCh38/GRCh38.fa'
 )
 
 # Each line represents one BED region file for each sample
 ALL_BED_FILE_PATH=(
-'/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.bed'
-'/work/Clair3-main/data/datatest/HG001/GRCh38/GRCh38.bed'
-'/work/Clair3-main/data/datatest/HG002/GRCh38/HG002_GRCh38.bed'
+'/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.bed'
+'/work/attdeepcaller/data/datatest/HG001/GRCh38/GRCh38.bed'
+'/work/attdeepcaller/data/datatest/HG002/GRCh38/HG002_GRCh38.bed'
 )
 
 # Each line represents one representation-unified VCF file for each sample
 UNIFIED_VCF_FILE_PATH=(
-'/work/Clair3-main-sy/data/outputref-HG001_GRCh38/unified.vcf.gz'
-'/work/Clair3-main-sy/data/outputref-HG001-GRCh38-600/unified.vcf.gz'
-'/work/Clair3-main-sy/data/outputref-HG002_GRCh38/unified.vcf.gz'
+'/work/attdeepcaller/data/outputref-HG001_GRCh38/unified.vcf.gz'
+'/work/attdeepcaller/data/outputref-HG001-GRCh38-600/unified.vcf.gz'
+'/work/attdeepcaller/data/outputref-HG002_GRCh38/unified.vcf.gz'
 )
 
 # Chromosome prefix ("chr" if chromosome names have the "chr" prefix)

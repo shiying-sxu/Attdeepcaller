@@ -23,7 +23,7 @@ PYTHON3="/home/user/anaconda3/envs/attdeepcaller/bin/python3"                   
 
 # Input parameters
 PLATFORM="ont"                         # e.g. {ont, hifi, ilmn}
-OUTPUT_DIR="/work/Clair3-main-sy/data/HG001-600-1000-trainoutput/fullalignment/modeltest"
+OUTPUT_DIR="/work/attdeepcaller/data/HG001-600-1000-trainoutput/fullalignment/modeltest"
 DATASET_FOLDER_PATH="${OUTPUT_DIR}/build"
 BINS_FOLDER_PATH="${DATASET_FOLDER_PATH}/bins"
 
