@@ -245,7 +245,10 @@ def MergeVcf(args):
 
     pileup_vcf_generator = pileup_vcf_generator_from(pileup_vcf_unzip_process=pileup_vcf_unzip_process)
     full_alignment_vcf_generator = iter(full_alignment_output)
+
     for vcf_infos in heapq.merge(full_alignment_vcf_generator, pileup_vcf_generator):
+    # for vcf_infos in heapq.merge(pileup_vcf_generator):       #easycase
+    # for vcf_infos in heapq.merge(full_alignment_vcf_generator):    #hardcase
         if len(vcf_infos) != 2:
             continue
         pos, row = vcf_infos

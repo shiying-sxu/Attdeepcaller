@@ -1,3 +1,4 @@
+
 from sys import stdin
 from argparse import ArgumentParser, SUPPRESS
 import os
@@ -56,6 +57,7 @@ def select_qual_from_stdin(args):
     and true variants missed by pileup calling would mostly have low quality score (reference quality score for missing
     variants), so only use a proportion of low quality variants for full alignment while maintain high quality pileup
     output, as full alignment calling is substantially slower than pileup calling.
+    从堆积vcf文件中选择一个全局质量截断来进行完全对齐调用。误报叠加变量和叠加调用遗漏的真实变量的质量分数大多较低(缺失变量的参考质量分数)，因此在保持高质量pileup输出的同时，只使用一定比例的低质量变量进行全对齐，因为全对齐调用基本上比叠加调用慢。4
     """
     var_pct_full = args.var_pct_full
     qual_fn = args.qual_fn if args.qual_fn is not None else "qual"
@@ -63,7 +65,7 @@ def select_qual_from_stdin(args):
     ref_pct_full = args.ref_pct_full if args.ref_pct_full else var_pct_full
     # for efficiency, we use a maximum 30% reference candidates proportion for full-alignment calling, which is almost cover all false negative candidates
     # for ont platform, we set a default 10% reference candidates proportion for full-alignment calling unless a known vcf file is provided (genotyping mode)
-    # directly set default value in run_attdeepcaller.sh from v0.1-r5
+    # directly set default value in run_clair3.sh from v0.1-r5
     # ref_pct_full = 0.1 if args.platform == 'ont' else ref_pct_full
     # ref_pct_full = min(ref_pct_full, 0.3)
 

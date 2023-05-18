@@ -1062,7 +1062,7 @@ def UnifyRepresentation(args):
 
     if candidate_details_fn is None:
         basedir = os.path.dirname(__file__)
-        CTFA_Bin = basedir + "/../attdeepcaller.py CreateTensorFullAlignment"
+        CTFA_Bin = basedir + "/../clair3.py CreateTensorFullAlignment"
         pypyBin = executable_command_string_from(args.pypy, exit_on_not_found=True)
         bam_fn = file_path_from(args.bam_fn, exit_on_not_found=True)
         ref_fn = file_path_from(args.ref_fn, exit_on_not_found=True)

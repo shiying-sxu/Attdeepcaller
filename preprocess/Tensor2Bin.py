@@ -2,7 +2,7 @@ import sys
 import logging
 from argparse import ArgumentParser, SUPPRESS
 
-import attdeepcaller.utils as utils
+import clair3.utils as utils
 
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 

@@ -56,9 +56,9 @@ def check_return_code(signum, frame):
 def Run(args):
     basedir = dirname(__file__)
 
-    CTP_Bin = basedir + "/../attdeepcaller.py CreateTensorPileup"
-    CTFA_Bin = basedir + "/../attdeepcaller.py CreateTensorFullAlignment"
-    T2B_Bin = basedir + "/../attdeepcaller.py Tensor2Bin"
+    CTP_Bin = basedir + "/../clair3.py CreateTensorPileup"
+    CTFA_Bin = basedir + "/../clair3.py CreateTensorFullAlignment"
+    T2B_Bin = basedir + "/../clair3.py Tensor2Bin"
 
     if args.delay > 0:
         delay = random.randrange(0, args.delay)

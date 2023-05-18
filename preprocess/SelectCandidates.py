@@ -116,6 +116,7 @@ def SelectCandidates(args):
     and true variants missed by pileup calling would mostly have low quality score (reference quality score for missing
     variants), so only use a proportion of low quality variants for full alignment while maintain high quality pileup
     output, as full alignment calling is substantially slower than pileup calling.
+    选择低质量和低序列熵的候选变量进行完全对齐。误报叠加变量和叠加调用遗漏的真实变量的质量分数大多较低(缺失变量的参考质量分数)，因此在保持高质量叠加输出的同时，只使用一定比例的低质量变量进行全对齐，因为全对齐调用基本上比叠加调用慢。
     """
 
     phased_vcf_fn = args.phased_vcf_fn
