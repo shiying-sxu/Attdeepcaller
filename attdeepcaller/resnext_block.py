@@ -118,88 +118,8 @@ class SpatialAttention_F(tf.keras.layers.Layer):
         out = self.conv1(out)
 
         return out
-############################### SE注意力机制 ###############################
-class SE_BLOCK(tf.keras.layers.Layer):
-    def __init__(self, in_planes, ratio=4):
-        super(SE_BLOCK, self).__init__()
-        self.avg= tf.keras.layers.GlobalAveragePooling2D()
-        self.conv1 = tf.keras.layers.Conv2D(in_planes//ratio, kernel_size=1, strides=1, padding='same',
-                                   kernel_regularizer=tf.keras.regularizers.l2(1e-4),
-                                   use_bias=True, activation=tf.nn.relu)
-        self.conv2 = tf.keras.layers.Conv2D(in_planes, kernel_size=1, strides=1, padding='same',
-                                   kernel_regularizer=tf.keras.regularizers.l2(1e-4),
-                                   use_bias=True)
-
-    def call(self, inputs):
-        avg = self.avg(inputs)
-        avg = tf.keras.layers.Reshape((1, 1, avg.shape[1]))(avg)   # shape (None, 1, 1 feature)
-        avg_out = self.conv2(self.conv1(avg))
-        out = tf.nn.sigmoid(avg_out)
 
 
-        return out
-
-
-import math
-############################### ECA注意力机制 ###############################
-class ECA_BLOCK(tf.keras.layers.Layer):
-    def __init__(self, in_planes, gamma = 2, b = 1):
-        super(ECA_BLOCK, self).__init__()
-        # 设计自适应卷积核，便于后续做1*1卷积
-        kernel_size = int(abs((math.log(in_planes, 2) + b) / gamma))
-        kernel_size = kernel_size if kernel_size % 2 else kernel_size + 1
-
-        self.avg= tf.keras.layers.GlobalAveragePooling2D()
-        self.conv1 = tf.keras.layers.Conv1D(filters=1, kernel_size=kernel_size, padding='same', use_bias=False)
-
-    def call(self, inputs):
-        in_channel = inputs.shape[-1]
-
-
-        avg = self.avg(inputs)
-
-
-        avg = tf.keras.layers.Reshape((in_channel, 1))(avg)   # shape (None, 1, 1 feature)
-        avg_out = self.conv1(avg)
-        out = tf.nn.sigmoid(avg_out)
-        out = tf.keras.layers.Reshape((1, 1, in_channel))(out)
-
-
-        return out
-
-############################### NEW 注意力机制 ###############################
-class NewATT_BLOCK(tf.keras.layers.Layer):
-    def __init__(self, in_planes, gamma = 2, b = 1):
-        super(NewATT_BLOCK, self).__init__()
-        # 设计自适应卷积核，便于后续做1*1卷积
-        kernel_size = int(abs((math.log(in_planes, 2) + b) / gamma))
-        kernel_size = kernel_size if kernel_size % 2 else kernel_size + 1
-
-        self.avg= tf.keras.layers.GlobalAveragePooling2D()
-        self.max = tf.keras.layers.GlobalMaxPooling2D()
-        self.conv1 = tf.keras.layers.Conv1D(filters=1, kernel_size=kernel_size, padding='same', use_bias=False)
-
-    def call(self, inputs):
-        in_channel = inputs.shape[-1]
-
-
-        avg = self.avg(inputs)
-        max = self.max(inputs)
-
-
-        avg = tf.keras.layers.Reshape((in_channel, 1))(avg)   # shape (None, 1, 1 feature)
-        max = tf.keras.layers.Reshape((in_channel, 1))(max)   # shape (None, 1, 1 feature)
-        avg_out = self.conv1(avg)
-        max_out = self.conv1(max)
-        out = avg_out + max_out
-        out = tf.nn.sigmoid(out)
-        out = tf.keras.layers.Reshape((1, 1, in_channel))(out)
-
-
-        return out
-
-
-############################### ResNeXt_BottleNeck###############################
 
 class ResNeXt_BottleNeck(tf.keras.layers.Layer):
     def __init__(self, filters, strides, groups):
@@ -223,16 +143,10 @@ class ResNeXt_BottleNeck(tf.keras.layers.Layer):
         self.bn3 = tf.keras.layers.BatchNormalization()
 
         ############################### 注意力机制 ###############################
-        # self.ca = ChannelAttention_F(2*filters)
-        # self.sa = SpatialAttention_F()
-        ############################### SE ###############################
-        # self.se = SE_BLOCK(2*filters)
-
-        ############################### ECA ###############################
-        # self.eca = ECA_BLOCK(2 * filters)
-        ############################### NewATT ###############################
-        self.newatt = NewATT_BLOCK(2 * filters)
+        self.ca = ChannelAttention_F(2*filters)
         self.sa = SpatialAttention_F()
+
+
         self.shortcut_conv = tf.keras.layers.Conv2D(filters=2 * filters,
                                                     kernel_size=(1, 1),
                                                     strides=strides,
@@ -252,16 +166,9 @@ class ResNeXt_BottleNeck(tf.keras.layers.Layer):
         # print(x.shape)#(20, 30, 11, 128)
         #x = self.ca(x) * x 报错required broadcastable shapes往往是由维度不同造成的
         ############################### 注意力机制 ###############################
-        # x = self.ca(x) * x
-        # x = self.sa(x) * x
-        ############################### SE ###############################
-        # x = self.se(x) * x
-
-        ############################### ECA ###############################
-        # x = self.eca(x) * x
-        ############################### ECA&SAM ###############################
-        x = self.newatt(x) * x
+        x = self.ca(x) * x
         x = self.sa(x) * x
+
 
         x = tf.nn.relu(x)
 

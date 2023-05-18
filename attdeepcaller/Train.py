@@ -169,10 +169,10 @@ def train_model(args):
     ochk_prefix = args.ochk_prefix if args.ochk_prefix is not None else ""
     if pileup:
         import shared.param_p as param
-        model = model_path.attdeepcaller_P()#attdeepcaller_P函数是用来生成pileup模型的
+        model = model_path.Clair3_P()#Clair3_P函数是用来生成pileup模型的
     else:
         import shared.param_f as param
-        model = model_path.attdeepcaller_F(add_indel_length=add_indel_length)##attdeepcaller_F函数是用来生成fulalign模型的
+        model = model_path.Clair3_F(add_indel_length=add_indel_length)##Clair3_F函数是用来生成fulalign模型的
 
     tensor_shape = param.ont_input_shape if platform == 'ont' else param.input_shape
     label_shape = param.label_shape

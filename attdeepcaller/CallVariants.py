@@ -18,7 +18,8 @@ from attdeepcaller.task.gt21 import (
 import attdeepcaller.utils as utils
 import shared.param_p as param
 from attdeepcaller.task.genotype import Genotype, genotype_string_from, genotype_enum_from, genotype_enum_for_task
-from shared.utils import IUPAC_base_to_ACGT_base_dict as BASE2ACGT, BASIC_BASES, str2bool, file_path_from, log_error, log_warning
+from shared.utils import IUPAC_base_to_ACGT_base_dict as BASE2ACGT, BASIC_BASES, str2bool, file_path_from, \
+    log_error, log_warning, convert_iupac_to_n
 from attdeepcaller.task.variant_length import VariantLength
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.basicConfig(format='%(message)s', level=logging.INFO)
@@ -39,7 +40,8 @@ OutputConfig = namedtuple('OutputConfig', [
     'gvcf',
     'pileup',
     'enable_long_indel',
-    'maximum_variant_length_that_need_infer'
+    'maximum_variant_length_that_need_infer',
+    'keep_iupac_bases'
 ])
 OutputUtilities = namedtuple('OutputUtilities', [
     'print_debug_message',
@@ -199,7 +201,8 @@ def Run(args):
         gvcf=args.gvcf,
         pileup=args.pileup,
         enable_long_indel=args.enable_long_indel,
-        maximum_variant_length_that_need_infer=maximum_variant_length_that_need_infer
+        maximum_variant_length_that_need_infer=maximum_variant_length_that_need_infer,
+        keep_iupac_bases=args.keep_iupac_bases
     )
     output_utilities = output_utilties_from(
         sample_name=args.sampleName,
@@ -207,7 +210,7 @@ def Run(args):
         is_output_for_ensemble=args.output_for_ensemble,
         reference_file_path=args.ref_fn,
         output_file_path=args.call_fn,
-        output_probabilities=args.output_probabilities
+        output_probabilities=args.output_probabilities,
     )
     if args.input_probabilities:
         call_variants_with_probabilities_input(args=args, output_config=output_config,
@@ -264,6 +267,8 @@ def output_utilties_from(
         from textwrap import dedent
         output(dedent("""\
             ##fileformat=VCFv4.2
+            ##source=attdeepcaller
+            ##attdeepcaller_version={}
             ##FILTER=<ID=PASS,Description="All filters passed">
             ##FILTER=<ID=LowQual,Description="Low quality variant">
             ##FILTER=<ID=RefCall,Description="Reference call">
@@ -274,7 +279,7 @@ def output_utilties_from(
             ##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
             ##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Read depth for each allele">
             ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Phred-scaled genotype likelihoods rounded to the closest integer">
-            ##FORMAT=<ID=AF,Number=1,Type=Float,Description="Estimated allele frequency in the range of [0,1]">"""
+            ##FORMAT=<ID=AF,Number=1,Type=Float,Description="Estimated allele frequency in the range of [0,1]">""".format(param.version)
                       ))
 
         if reference_file_path is not None:
@@ -1307,6 +1312,10 @@ def output_with(
         is_reference=is_reference
     )
 
+    if not output_config.keep_iupac_bases:
+        reference_base = convert_iupac_to_n(reference_base)
+        alternate_base = convert_iupac_to_n(alternate_base)
+    
     if output_config.is_debug:
         output_utilities.print_debug_message(
             chromosome,
@@ -1384,7 +1393,7 @@ def compute_PL(genotype_string, genotype_probabilities, gt21_probabilities, refe
             gt21_prob_index = gt21_enum_from_label(gt21_label)
         except:
             #skip N positions
-            return [990 * len(genotypes[alt_num])]
+            return [990] * len(genotypes[alt_num])
         genotype_prob_21 = gt21_probabilities[gt21_prob_index]
 
         # obtain the genotype probability from 3 zygosity
@@ -1427,12 +1436,12 @@ def call_variants(args, output_config, output_utilities):
     global param
     if args.pileup:
         import shared.param_p as param
-        from attdeepcaller.model import attdeepcaller_P
-        m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import Clair3_P
+        m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
     else:
         import shared.param_f as param
-        from attdeepcaller.model import attdeepcaller_F
-        m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import Clair3_F
+        m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
 
     m.load_weights(args.chkpnt_fn)
 
@@ -1655,11 +1664,11 @@ def predict(args, output_config, output_utilities):
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
     if args.pileup:
-        from attdeepcaller.model import attdeepcaller_P
-        m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import Clair3_P
+        m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
     else:
-        from attdeepcaller.model import attdeepcaller_F
-        m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import Clair3_F
+        m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
 
     batch_output_method = batch_output_for_ensemble if output_config.is_output_for_ensemble else batch_output
     m.load_weights(args.chkpnt_fn)
@@ -1807,6 +1816,9 @@ def main():
 
     parser.add_argument('--enable_long_indel', type=str2bool, default=False,
                         help="EXPERIMENTAL: Enable long Indel variants(>50 bp) calling")
+
+    parser.add_argument('--keep_iupac_bases', type=str2bool, default=False,
+                        help="EXPERIMENTAL: Keep IUPAC (non ACGTN) reference and alternate bases, default: convert all IUPAC bases to N")
 
     # options for debug purpose
     parser.add_argument('--use_gpu', type=str2bool, default=False,

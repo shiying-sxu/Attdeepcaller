@@ -47,7 +47,8 @@ def Run(args):
         gvcf=args.gvcf,
         pileup=args.pileup,
         enable_long_indel=args.enable_long_indel,
-        maximum_variant_length_that_need_infer=maximum_variant_length_that_need_infer
+        maximum_variant_length_that_need_infer=maximum_variant_length_that_need_infer,
+        keep_iupac_bases=args.keep_iupac_bases
     )
     output_utilities = output_utilties_from(
         sample_name=args.sampleName,
@@ -84,16 +85,16 @@ def call_variants_from_cffi(args, output_config, output_utilities):
             model_name = 'pileup'
             input_dtype = 'INT32'
         else:
-            from attdeepcaller.model import attdeepcaller_P
-            m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
+            from attdeepcaller.model import Clair3_P
+            m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
     else:
         import shared.param_f as param
         if use_gpu:
             model_name = 'alignment'
             input_dtype = 'INT8'
         else:
-            from attdeepcaller.model import attdeepcaller_F
-            m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
+            from attdeepcaller.model import Clair3_F
+            m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
 
     if not use_gpu:
         m.load_weights(args.chkpnt_fn)
@@ -131,6 +132,14 @@ def call_variants_from_cffi(args, output_config, output_utilities):
 
     for (X, position, alt_info_list) in tensor_generator:
             total += len(X)
+            if args.pileup:
+                for alt_idx, alt_info in enumerate(alt_info_list):
+                    depth = int(alt_info.split('-', maxsplit=1)[0])
+                    max_depth = param.max_depth_dict[args.platform]
+                    # for extreme high coverage data, make sure we could have a truncated coverage
+                    if depth > 0 and depth > max_depth * 1.5:
+                        scale_factor = depth / max_depth
+                        X[alt_idx] = X[alt_idx] / scale_factor
 
             if use_gpu:
                 inputs = []; outputs = []
@@ -225,6 +234,9 @@ def main():
 
     parser.add_argument('--enable_long_indel', type=str2bool, default=False,
                         help="EXPERIMENTAL: Enable long Indel variants(>50 bp) calling")
+
+    parser.add_argument('--keep_iupac_bases', type=str2bool, default=False,
+                        help="EXPERIMENTAL: Keep IUPAC (non ACGTN) reference and alternate bases, default: convert all IUPAC bases to N")
 
     # options for debug purpose
     parser.add_argument('--use_gpu', type=str2bool, default=False,
