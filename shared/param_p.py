@@ -1,5 +1,6 @@
-#attdeepcaller pileup parameters
-REPO_NAME="attdeepcaller"
+#Clair3 pileup parameters
+REPO_NAME="Clair3"
+version = "1.0.0"
 import re
 from itertools import accumulate
 
@@ -43,11 +44,9 @@ phasing_window_size = 30000
 extend_bp=10
 
 #Training hyperparameters
-chunk_size = 250#250
-# trainBatchSize = 2000
-trainBatchSize = 250#250###2000
-#####trainBatchSize必须是chunk_size的整数倍， line 168, 否则 train_model中168行  assert batch_size % chunk_size == 0会报错
-predictBatchSize = 200#200
+chunk_size = 250
+trainBatchSize = 2000
+predictBatchSize = 200
 initialLearningRate = 1e-3
 trainingDatasetPercentage = 0.90
 l2RegularizationLambda = 0.0001

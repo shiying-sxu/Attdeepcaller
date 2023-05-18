@@ -1,5 +1,6 @@
-# attdeepcaller full alignment parameters
-REPO_NAME = "attdeepcaller"
+# Clair3 full alignment parameters
+REPO_NAME = "Clair3"
+version = "1.0.0"
 from itertools import accumulate
 
 zstd='zstd'
@@ -45,9 +46,7 @@ extend_bp = 10
 
 # Training hyperparameters
 chunk_size = 200
-# trainBatchSize = 2000
-trainBatchSize = 200  #2000
-#####trainBatchSize必须是chunk_size的整数倍， line 168, 否则 train_model中168行  assert batch_size % chunk_size == 0会报错
+trainBatchSize = 2000
 predictBatchSize = 200
 initialLearningRate = 1e-3
 l2RegularizationLambda = 1e-7
