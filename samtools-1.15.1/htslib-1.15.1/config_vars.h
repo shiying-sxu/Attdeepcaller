@@ -1,0 +1,5 @@
+#define HTS_CC "gcc"
+#define HTS_CPPFLAGS ""
+#define HTS_CFLAGS "-fpic -std=c99 -O3 -I /home/user/anaconda3/envs/atttrio/include -L /home/user/anaconda3/envs/atttrio/lib"
+#define HTS_LDFLAGS "-L /home/user/anaconda3/envs/atttrio/lib"
+#define HTS_LIBS "-ldeflate -llzma -lbz2 -lz -lm   -lcurl -lcrypto"

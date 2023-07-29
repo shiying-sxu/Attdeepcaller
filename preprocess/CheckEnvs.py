@@ -59,10 +59,10 @@ def check_tools_version(tool_version, required_tool_version):
         if platform.system() == "Darwin" and tool == 'whatshap':
             continue
         if version is None:
-            print(log_error("[ERROR] {} not found, please check you are in clair3 virtual environment".format(tool)))
+            print(log_error("[ERROR] {} not found, please check you are in attdeepcaller virtual environment".format(tool)))
             check_python_path()
         elif version < required_version:
-            print(log_error("[ERROR] Tool version not match, please check you are in clair3 virtual environment"))
+            print(log_error("[ERROR] Tool version not match, please check you are in attdeepcaller virtual environment"))
             print(' '.join([str(item).ljust(10) for item in ["Tool", "Version", "Required"]]))
             error_info = ' '.join([str(item).ljust(10) for item in [tool, version, '>=' + str(required_version)]])
             print(error_info)

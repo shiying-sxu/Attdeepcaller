@@ -85,16 +85,16 @@ def call_variants_from_cffi(args, output_config, output_utilities):
             model_name = 'pileup'
             input_dtype = 'INT32'
         else:
-            from attdeepcaller.model import Clair3_P
-            m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
+            from attdeepcaller.model import attdeepcaller_P
+            m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
     else:
         import shared.param_f as param
         if use_gpu:
             model_name = 'alignment'
             input_dtype = 'INT8'
         else:
-            from attdeepcaller.model import Clair3_F
-            m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
+            from attdeepcaller.model import attdeepcaller_F
+            m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
 
     if not use_gpu:
         m.load_weights(args.chkpnt_fn)

@@ -1,0 +1,21 @@
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr20 in individual SAMPLE
+Found 269 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 1002 reads covering 269 variants
+Kept 881 reads that cover at least two variants each
+Selected 72 most phase-informative reads covering 269 variants
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 269 variants (100.0% of accessible variants) between position 101371 and 299130
+
+# Resource usage
+Maximum memory usage: 0.166 GB
+Time spent reading BAM/CRAM:                    2.5 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.2 s
+Time spent phasing:                             1.7 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             4.4 s

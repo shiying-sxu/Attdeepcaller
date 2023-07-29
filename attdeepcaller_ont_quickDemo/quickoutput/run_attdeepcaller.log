@@ -1,0 +1,172 @@
+[INFO] attdeepcaller VERSION: v1.0.1
+[INFO] BAM FILE PATH: /work/attdeepcaller/./attdeepcaller_ont_quickDemo/HG003_chr20_demo.bam
+[INFO] REFERENCE FILE PATH: /work/attdeepcaller/./attdeepcaller_ont_quickDemo/GRCh38_no_alt_chr20.fa
+[INFO] MODEL PATH: /data2/attdeepcaller/data/model/ATT-chr20/finetun-chr20
+[INFO] OUTPUT FOLDER: /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput
+[INFO] PLATFORM: ont
+[INFO] THREADS: 200
+[INFO] BED FILE PATH: /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quick_demo.bed
+[INFO] VCF FILE PATH: EMPTY
+[INFO] CONTIGS: EMPTY
+[INFO] CONDA PREFIX: /home/user/anaconda3/envs/attdeepcaller
+[INFO] SAMTOOLS PATH: samtools
+[INFO] PYTHON PATH: python3
+[INFO] PYPY PATH: pypy3
+[INFO] PARALLEL PATH: parallel
+[INFO] WHATSHAP PATH: whatshap
+[INFO] LONGPHASE PATH: EMPTY
+[INFO] CHUNK SIZE: 5000000
+[INFO] FULL ALIGN PROPORTION: 0.7
+[INFO] FULL ALIGN REFERENCE PROPORTION: 0.1
+[INFO] PHASING PROPORTION: 0.7
+[INFO] MINIMUM MQ: 5
+[INFO] MINIMUM COVERAGE: 2
+[INFO] SNP AF THRESHOLD: 0.08
+[INFO] INDEL AF THRESHOLD: 0.15
+[INFO] ENABLE FILEUP ONLY CALLING: False
+[INFO] ENABLE FAST MODE CALLING: False
+[INFO] ENABLE CALLING SNP CANDIDATES ONLY: False
+[INFO] ENABLE PRINTING REFERENCE CALLS: False
+[INFO] ENABLE OUTPUT GVCF: False
+[INFO] ENABLE HAPLOID PRECISE MODE: False
+[INFO] ENABLE HAPLOID SENSITIVE MODE: False
+[INFO] ENABLE INCLUDE ALL CTGS CALLING: False
+[INFO] ENABLE NO PHASING FOR FULL ALIGNMENT: False
+[INFO] ENABLE REMOVING INTERMEDIATE FILES: False
+[INFO] ENABLE LONGPHASE FOR INTERMEDIATE VCF PHASING: False
+[INFO] ENABLE PHASING FINAL VCF OUTPUT USING WHATSHAP: False
+[INFO] ENABLE PHASING FINAL VCF OUTPUT USING LONGPHASE: False
+[INFO] ENABLE HAPLOTAGGING FINAL BAM: False
+[INFO] ENABLE LONG INDEL CALLING: False
+[INFO] ENABLE C_IMPLEMENT: True
+
+[33m[WARNING] Threads setting exceeds maximum available threads 40, set threads=40[0m
++ /work/attdeepcaller/scripts/attdeepcaller_c_impl.sh --bam_fn /work/attdeepcaller/./attdeepcaller_ont_quickDemo/HG003_chr20_demo.bam --ref_fn /work/attdeepcaller/./attdeepcaller_ont_quickDemo/GRCh38_no_alt_chr20.fa --threads 40 --model_path /data2/attdeepcaller/data/model/ATT-chr20/finetun-chr20 --platform ont --output /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput --bed_fn=/work/attdeepcaller/./attdeepcaller_ont_quickDemo/quick_demo.bed --vcf_fn=EMPTY --ctg_name=EMPTY --sample_name=SAMPLE --chunk_num=0 --chunk_size=5000000 --samtools=samtools --python=python3 --pypy=pypy3 --parallel=parallel --whatshap=whatshap --qual=2 --var_pct_full=0.7 --ref_pct_full=0.1 --var_pct_phasing=0.7 --snp_min_af=0.08 --indel_min_af=0.15 --min_mq=5 --min_coverage=2 --min_contig_size=0 --pileup_only=False --gvcf=False --fast_mode=False --call_snp_only=False --print_ref_calls=False --haploid_precise=False --haploid_sensitive=False --include_all_ctgs=False --no_phasing_for_fa=False --pileup_model_prefix=pileup --fa_model_prefix=full_alignment --remove_intermediate_dir=False --enable_phasing=False --enable_long_indel=False --keep_iupac_bases=False --use_gpu=False --longphase_for_phasing=False --longphase=EMPTY --use_whatshap_for_intermediate_phasing=True --use_longphase_for_intermediate_phasing=False --use_whatshap_for_final_output_phasing=False --use_longphase_for_final_output_phasing=False --use_whatshap_for_final_output_haplotagging=False
+
+[INFO] Check environment variables
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/log
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/split_beds
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/pileup_output
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/merge_output
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/phase_output
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/gvcf_tmp_output
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/full_alignment_output
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/phase_output/phase_vcf
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/phase_output/phase_bam
+[INFO] Create folder /work/attdeepcaller/attdeepcaller_ont_quickDemo/quickoutput/tmp/full_alignment_output/candidate_bed
+[INFO] --include_all_ctgs not enabled, use chr{1..22,X,Y} and {1..22,X,Y} by default
+[INFO] Call variant in contigs: chr20
+[INFO] Chunk number for each contig: 13
+[INFO] 1/7 Call variants using pileup model
+Calling variants ...
+Total processed positions in chr20 (chunk 8/13) : 376
+Total time elapsed: 17.40 s
+Calling variants ...
+Total processed positions in chr20 (chunk 2/13) : 426
+Total time elapsed: 17.29 s
+Calling variants ...
+Total processed positions in chr20 (chunk 6/13) : 399
+Total time elapsed: 17.38 s
+Calling variants ...
+Total processed positions in chr20 (chunk 3/13) : 398
+Total time elapsed: 17.51 s
+Calling variants ...
+Total processed positions in chr20 (chunk 9/13) : 388
+Total time elapsed: 17.43 s
+Calling variants ...
+Total processed positions in chr20 (chunk 5/13) : 468
+Total time elapsed: 17.91 s
+Calling variants ...
+Total processed positions in chr20 (chunk 10/13) : 414
+Total time elapsed: 18.42 s
+Calling variants ...
+Total processed positions in chr20 (chunk 4/13) : 403
+Total time elapsed: 18.19 s
+Calling variants ...
+Total processed positions in chr20 (chunk 11/13) : 528
+Total time elapsed: 18.68 s
+Calling variants ...
+Total processed positions in chr20 (chunk 12/13) : 554
+Total time elapsed: 18.54 s
+Calling variants ...
+Total processed positions in chr20 (chunk 1/13) : 384
+Total time elapsed: 19.15 s
+Calling variants ...
+Total processed positions in chr20 (chunk 13/13) : 587
+Total time elapsed: 19.96 s
+Calling variants ...
+Total processed positions in chr20 (chunk 7/13) : 392
+Total time elapsed: 20.51 s
+
+real	0m27.253s
+user	4m44.646s
+sys	0m25.182s
+
+[INFO] 2/7 Select heterozygous SNP variants for Whatshap phasing and haplotagging
+[INFO] Select heterozygous pileup variants exceeding phasing quality cutoff 23
+[INFO] Total heterozygous SNP positions selected: chr20: 269
+
+real	0m0.261s
+user	0m0.202s
+sys	0m0.068s
+
+[INFO] 3/7 Phase VCF file using Whatshap
+This is WhatsHap 1.7 running under Python 3.9.0
+Working on 1 sample from 1 family
+
+# Working on contig chr20 in individual SAMPLE
+Found 269 usable heterozygous variants (0 skipped due to missing genotypes)
+Found 1002 reads covering 269 variants
+Kept 881 reads that cover at least two variants each
+Selected 72 most phase-informative reads covering 269 variants
+Phasing 1 sample by solving the MEC problem ...
+Largest block contains 269 variants (100.0% of accessible variants) between position 101371 and 299130
+
+# Resource usage
+Maximum memory usage: 0.166 GB
+Time spent reading BAM/CRAM:                    2.5 s
+Time spent parsing VCF:                         0.0 s
+Time spent selecting reads:                     0.2 s
+Time spent phasing:                             1.7 s
+Time spent writing VCF:                         0.0 s
+Time spent finding components:                  0.0 s
+Time spent on rest:                             0.0 s
+Total elapsed time:                             4.4 s
+
+real	0m4.913s
+user	0m3.865s
+sys	0m0.277s
+
+[INFO] 5/7 Select candidates for full-alignment calling
+[INFO] Set variants quality cutoff 27.0
+[INFO] Set reference calls quality cutoff 21.0
+[INFO] Low quality reference calls to be processed in chr20: 510
+[INFO] Low quality variants to be processed in chr20: 404
+
+real	0m0.283s
+user	0m0.205s
+sys	0m0.089s
+
+[INFO] 6/7 Call low-quality variants using full-alignment model
+Calling variants ...
+Total processed positions in chr20 (chunk 1/1) : 914
+Total time elapsed: 48.05 s
+
+real	0m52.259s
+user	0m43.225s
+sys	0m8.895s
+
+[INFO] 7/7 Merge pileup VCF and full-alignment VCF
+[INFO] Pileup variants processed in chr20: 175
+[INFO] Full-alignment variants processed in chr20: 376
+
+real	0m0.425s
+user	0m0.293s
+sys	0m0.124s
+
+[INFO] Finish calling, output file: /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput/merge_output.vcf.gz
+
+real	1m27.297s
+user	5m33.565s
+sys	0m35.009s

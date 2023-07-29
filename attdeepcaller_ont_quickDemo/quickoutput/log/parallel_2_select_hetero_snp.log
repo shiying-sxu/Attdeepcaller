@@ -1,0 +1,2 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1690618041.135	     0.145	0	61	0	0	pypy3 /work/attdeepcaller/scripts/../attdeepcaller.py SelectHetSnp         --vcf_fn /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput/pileup.vcf.gz         --split_folder /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput/tmp/phase_output/phase_vcf         --ctgName chr20

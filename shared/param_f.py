@@ -46,7 +46,7 @@ extend_bp = 10
 
 # Training hyperparameters
 chunk_size = 200
-trainBatchSize = 2000
+trainBatchSize = 400
 predictBatchSize = 200
 initialLearningRate = 1e-3
 l2RegularizationLambda = 1e-7

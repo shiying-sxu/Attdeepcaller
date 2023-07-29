@@ -1,0 +1,2 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	:	1690618046.603	     0.162	0	0	0	0	pypy3 /work/attdeepcaller/scripts/../attdeepcaller.py SelectCandidates     --pileup_vcf_fn /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput/pileup.vcf.gz     --split_folder /work/attdeepcaller/./attdeepcaller_ont_quickDemo/quickoutput/tmp/full_alignment_output/candidate_bed     --ref_fn /work/attdeepcaller/./attdeepcaller_ont_quickDemo/GRCh38_no_alt_chr20.fa     --var_pct_full 0.7     --ref_pct_full 0.1     --platform ont     --ctgName chr20

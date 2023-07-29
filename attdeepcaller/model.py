@@ -23,6 +23,7 @@ from tensorflow.python.ops.numpy_ops import np_config
 np_config.enable_numpy_behavior()
 
 
+
 params = dict(
             float_type=tf.float32,
             task_loss_weights=[
@@ -144,12 +145,12 @@ class BasicConv2D_P2(tf.keras.layers.Layer):
 
         return output
 
-class Clair3_P(tf.keras.Model):
+class attdeepcaller_P(tf.keras.Model):
     # CBAM-RENET model for attdeepcaller pileup input
 
 
     def __init__(self,add_indel_length=False, predict=False):
-        super(Clair3_P, self).__init__()
+        super(attdeepcaller_P, self).__init__()
 
         # output
         self.output_gt21_shape = params['output_gt21_shape']
@@ -423,10 +424,10 @@ class PyramidPolling(tf.keras.layers.Layer):
         return pp
 
 
-class Clair3_F(tf.keras.Model):
+class attdeepcaller_F(tf.keras.Model):
     # Residual CNN model for attdeepcaller full alignment input
     def __init__(self, add_indel_length=False, predict=False):
-        super(Clair3_F, self).__init__()
+        super(attdeepcaller_F, self).__init__()
         self.output_gt21_shape = params['output_gt21_shape']
         self.output_genotype_shape = params['output_genotype_shape']
         self.output_indel_length_shape_1 = params['output_indel_length_shape_1']

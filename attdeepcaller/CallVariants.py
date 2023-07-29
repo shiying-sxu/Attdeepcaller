@@ -1436,12 +1436,12 @@ def call_variants(args, output_config, output_utilities):
     global param
     if args.pileup:
         import shared.param_p as param
-        from attdeepcaller.model import Clair3_P
-        m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import attdeepcaller_P
+        m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
     else:
         import shared.param_f as param
-        from attdeepcaller.model import Clair3_F
-        m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import attdeepcaller_F
+        m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
 
     m.load_weights(args.chkpnt_fn)
 
@@ -1664,11 +1664,11 @@ def predict(args, output_config, output_utilities):
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
     if args.pileup:
-        from attdeepcaller.model import Clair3_P
-        m = Clair3_P(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import attdeepcaller_P
+        m = attdeepcaller_P(add_indel_length=args.add_indel_length, predict=True)
     else:
-        from attdeepcaller.model import Clair3_F
-        m = Clair3_F(add_indel_length=args.add_indel_length, predict=True)
+        from attdeepcaller.model import attdeepcaller_F
+        m = attdeepcaller_F(add_indel_length=args.add_indel_length, predict=True)
 
     batch_output_method = batch_output_for_ensemble if output_config.is_output_for_ensemble else batch_output
     m.load_weights(args.chkpnt_fn)

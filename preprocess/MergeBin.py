@@ -4,7 +4,7 @@ import numpy as np
 from argparse import ArgumentParser, SUPPRESS
 import tables
 
-import clair3.utils as utils
+import attdeepcaller.utils as utils
 FILTERS = tables.Filters(complib='blosc:lz4hc', complevel=5)
 
 logging.basicConfig(format='%(message)s', level=logging.INFO)
