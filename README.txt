@@ -27,17 +27,20 @@ Train and test the attdeepcaller model:
 conda activate attdeepcaller
 The output union.vcf.gz is placed in the specified folder: OUTPUT_DIR
 ①sh subsampledata.sh#Downsampled data
-②sh rep_uni.sh #Normalized data
+②sh 0_rep_uni.sh #Normalized data
 2.pileup data training
-④sh trainpileupmodel.sh #Training preparation（pileup)
-⑤sh pileup_training.sh #Training（pileup)
+④sh 1_trainpileupmodel.sh #Training preparation（pileup)
+⑤sh 2_pileup_training.sh #Training（pileup)
+sh 3_pileup_finetune.sh  #finetune pileup model
 
 3.full-alignment training
-①sh trainfullalignmodel.sh #Training preparation（full-alignment)
-②sh fullalign_training.sh#Training(fullalignment)
+①sh 4_trainfullalignment_ont_r1.sh #Training preparation（full-alignment)
+②sh 5_training_fullalignment_ont_r1.sh#Training(fullalignment)
+sh 6_fullalignment_training_finetune-chr20.sh #finetune fullalignment model
 4.Testing
-①sh clair3_ont_quick_demo.sh #Testing(conda activate attdeepcaller)．
-②sh visualization_clair3_ont_quick_demo.sh #Test visualization(conda activate happy-env)
+①sh 7_attdeepcaller_ont_quick_demo-HG002.sh #Testing(conda activate attdeepcaller)．
+conda activate happy-env
+②sh 8_visualization_attdeepcaller_ont_quick_demo-HG002.sh #Test visualization(conda activate happy-env)
 
 conda activate attdeepcaller
 
@@ -45,8 +48,9 @@ conda activate attdeepcaller
 
 5.Model available
 The trained model is available at the following link:
-Link: https://pan.baidu.com/s/1fO5mlrko5KhdH4lwXVr_Bw
-Extraction code: glcv
+Link: https://pan.baidu.com/s/1pIcnAGP17T9fFXIBiSGB3A?pwd=wvyu
+
+Extraction code: wvyu
 
 6. Data available
 
