@@ -58,5 +58,22 @@ Reference genomes
 GRCh38_no_alt
 https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
 
+7.Illumina data preprocessing
+illumina need to install realigner Installation package
+# Install boost library
+conda install -c conda-forge boost=1.67.0 -y
+#echo "Environment:" ${CONDA_PREFIX}
+echo "Environment:" /home/user/anaconda3/envs/attdeepcaller
+# Make sure in Attdeepcaller directory
+cd Attdeepcaller
+
+cd preprocess/realign
+g++ -std=c++14 -O1 -shared -fPIC -o realigner ssw_cpp.cpp ssw.c realigner.cpp
+g++ -std=c++11 -shared -fPIC -o debruijn_graph -O3 debruijn_graph.cpp -I /home/user/anaconda3/envs/attdeepcaller/include -L /home/user/anaconda3/envs/attdeepcaller/lib
+
+
+
+
+
 View in Supplementary Materials.
 
