@@ -31,16 +31,16 @@ The output union.vcf.gz is placed in the specified folder: OUTPUT_DIR
 2.pileup data training
 ④sh 1_trainpileupmodel.sh #Training preparation（pileup)
 ⑤sh 2_pileup_training.sh #Training（pileup)
-sh 3_pileup_finetune.sh  #finetune pileup model
+
 
 3.full-alignment training
-①sh 4_trainfullalignment_ont_r1.sh #Training preparation（full-alignment)
-②sh 5_training_fullalignment_ont_r1.sh#Training(fullalignment)
-sh 6_fullalignment_training_finetune-chr20.sh #finetune fullalignment model
+①sh 3_trainfullalignment_ont_r1.sh #Training preparation（full-alignment)
+②sh 4_training_fullalignment_ont_r1.sh#Training(fullalignment)
+
 4.Testing
-①sh 7_attdeepcaller_ont_quick_demo-HG002.sh #Testing(conda activate attdeepcaller)．
+①sh 5_attdeepcaller_ont_quick_demo-HG002.sh #Testing(conda activate attdeepcaller)．
 conda activate happy-env
-②sh 8_visualization_attdeepcaller_ont_quick_demo-HG002.sh #Test visualization(conda activate happy-env)
+②sh 6_visualization_attdeepcaller_ont_quick_demo-HG002.sh #Test visualization(conda activate happy-env)
 
 conda activate attdeepcaller
 
