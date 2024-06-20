@@ -48,9 +48,9 @@ conda activate attdeepcaller
 
 5.Model available
 The trained model is available at the following link:
-Link: https://pan.baidu.com/s/1pIcnAGP17T9fFXIBiSGB3A?pwd=wvyu
+Link: https://pan.baidu.com/s/1NqcE5xtmZS-SFb5Md2o4dQ?pwd=2024 
 
-Extraction code: wvyu
+Extraction code: 2024
 
 6. Data available
 
